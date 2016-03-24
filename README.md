@@ -162,3 +162,39 @@ vagrant box remove bento/centos-6.7/chef-12.6.0/java-8/tomcat-7
 
 vagrant box add bento/centos-6.7/chef-12.6.0/java-8/tomcat-7 builds/centos-6.7-x86_64.java8.tomcat7.virtualbox.box
 ```
+
+####Nginx Server
+
+The Nginx box can be built from tomcat7 derivative box.
+
+To create the box you first need to create the var-file.  The var-file can contain the following variables:
+
+| Variable | Type       | Default | Description |
+| -------- | -----      | ------- | ----------- |
+| headless | String     | *false* | if *true* build the image without displaying the virtualbox GUI. |
+| base_box | String   |  | the ovf on which to base this derivative box. |
+| provider | String   | | the virtualisation provider of the base box and derivative box. |
+
+#####Example var-file
+
+```
+{
+  "headless": "true",
+  "base_box": "centos-6.7-x86_64.java8.tomcat7",
+  "provider": "virtualbox"
+}
+```
+
+To create a Nginx box execute the following command from the root of the repository:
+
+```
+packer build -force -var-file=boxes/nginx/variables.json boxes/nginx/box.json
+```
+
+#####Import box into Vagrant
+
+```
+vagrant box remove bento/centos-6.7/chef-12.6.0/java-8/tomcat-7/nginx
+
+vagrant box add bento/centos-6.7/chef-12.6.0/java-8/tomcat-7/nginx builds/centos-6.7-x86_64.java8.tomcat7.nginx.virtualbox.box
+```

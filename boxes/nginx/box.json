@@ -41,7 +41,8 @@
     {
       "cookbook_paths": "boxes/nginx/provisioners/chef/cookbooks",
       "run_list": [
-        "nginx_server"
+        "nginx_server",
+        "nginx_server_config"
       ],
       "skip_install": true,
       "type": "chef-solo"
